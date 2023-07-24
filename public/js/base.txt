@@ -1,0 +1,27 @@
+function mostrarSeleccion() {
+    // Obtener los checkboxes seleccionados
+    const checkboxes = document.getElementsByName("mantenimiento");
+    const seleccionados = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+
+    // Crear la base de conocimiento según las selecciones
+    let baseConocimiento = "";
+    seleccionados.forEach(checkbox => {
+      const opcionMantenimiento = checkbox.value;
+
+      if (opcionMantenimiento === "Manto Preventivo") {
+        baseConocimiento += "Mantenimiento preventivo:\n[Es un tipo de mantenimiento planificado que se lleva a cabo de manera regular para evitar posibles fallas o averías en un equipo o sistema. Consiste en inspecciones, limpieza, lubricación y reemplazo de piezas desgastadas, de acuerdo con un calendario establecido. El objetivo principal del mantenimiento preventivo es maximizar la vida útil del equipo y minimizar el riesgo de interrupciones no planificadas.]\n\n";
+      } else if (opcionMantenimiento === "Manto Predictivo") {
+        baseConocimiento += "Mantenimiento predictivo:\n[Este enfoque utiliza técnicas de monitoreo y análisis para predecir posibles fallas o problemas futuros en un equipo o sistema. Se recopilan datos en tiempo real, como vibraciones, temperaturas o niveles de desgaste, y se utilizan algoritmos y análisis para prever cuándo es probable que ocurra una falla. El mantenimiento predictivo permite programar actividades de mantenimiento antes de que se produzca una avería, reduciendo así el tiempo de inactividad y los costos asociados.]\n\n";
+      } else if (opcionMantenimiento === "Manto Correctivo") {
+        baseConocimiento += "Mantenimiento correctivo:\n[A diferencia del mantenimiento reactivo, que implica responder a las averías después de que ocurren, el mantenimiento proactivo busca identificar y abordar las causas fundamentales de los problemas antes de que se conviertan en fallas. Este enfoque implica un análisis exhaustivo de los equipos y sistemas, la identificación de posibles mejoras y la implementación de medidas preventivas para evitar futuras averías. El objetivo es optimizar el rendimiento y la confiabilidad a largo plazo, minimizando las interrupciones y los costos asociados.]\n\n";
+      } else if (opcionMantenimiento === "Manto Proactivo") {
+        baseConocimiento += "Mantenimiento proactivo:\n[Este tipo de mantenimiento se basa en la relación entre dos o más elementos dentro de un sistema. Se monitorean las condiciones y el rendimiento de diferentes componentes o equipos relacionados, y se toman acciones de mantenimiento en función de las correlaciones encontradas. Por ejemplo, si se detecta una disminución en el rendimiento de un componente, se pueden inspeccionar otros elementos relacionados para identificar posibles causas o problemas adicionales. El mantenimiento correlativo busca prevenir problemas en cascada y maximizar la eficiencia global del sistema.]\n\n";
+      } else if (opcionMantenimiento === "De baja") {
+        baseConocimiento += "Mantenimiento de baja:\n[Esta expresión no es comúnmente utilizada en el contexto del mantenimiento. Podría referirse a un tipo de mantenimiento menos frecuente o menos intensivo, en comparación con otros enfoques. Sin embargo, sin más información, es difícil proporcionar una descripción precisa. Si tienes más detalles o contexto sobre el mantenimiento de baja al que te refieres, estaré encantado de ayudarte con una respuesta más específica.]\n\n";
+      }
+    });
+
+    // Mostrar la base de conocimiento en el elemento <textarea>
+    const textareaResultado = document.getElementById("resultado");
+    textareaResultado.value = baseConocimiento;
+  }

@@ -1,0 +1,46 @@
+// Verificar si se enviaron datos por POST
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Obtener los datos del formulario
+    $nombre_pc = $_POST["nombre_pc"];
+    $fecha_inicio = $_POST["fecha_inicio"];
+    $departamento = $_POST["departamento"];
+    $hora_inicio = $_POST["hora_inicio"];
+    $area = $_POST["area"];
+    $fecha_final = $_POST["fecha_final"];
+    $operador = $_POST["operador"];
+    $hora_final = $_POST["hora_final"];
+    $prioridad = $_POST["prioridad"];
+    // Obtener los valores de los checkboxes seleccionados y concatenarlos con una coma
+    $mantenimiento = "";
+    if (isset($_POST["mantenimiento"])) {
+        foreach ($_POST["mantenimiento"] as $selected) {
+            $mantenimiento .= $selected . ", ";
+        }
+        $mantenimiento = rtrim($mantenimiento, ", "); // Eliminar la última coma y espacio
+    }    
+    $total_horas = $_POST["total_horas"];
+
+    // Convertir el formato de 12 horas a 24 horas
+    $horaInicio24h = date("H:i", strtotime($hora_inicio));
+    $horaFinal24h = date("H:i", strtotime($hora_final));
+    $totalhoras24h = date("H:i", strtotime($total_horas));
+
+
+    // Formatear las horas al formato 'HH:MM:SS'
+    // $hora_inicio = date("H:i:s", strtotime($hora_inicio)); 
+    // $hora_final = date("H:i:s", strtotime($hora_final));
+    // $total_horas = date("H:i:s", strtotime($total_horas));
+
+
+    // Luego, puedes llamar a la función del modelo para insertar los datos en la base de datos
+    $resultado = $ordenModel->insertarOrden($orden_no, $nombre_pc, $fecha_inicio, $departamento, $hora_inicio, $area, $fecha_final, $operador, $hora_final, $prioridad, $mantenimiento, $total_horas);
+
+    // Verificar el resultado y realizar acciones en consecuencia
+    if ($resultado) {
+        echo "<script>alert('Error no se ha guardado'); window.location.href = 'http://localhost/ordentrabajo/';</script>";
+        exit();
+    } else {
+        echo "<script>alert('Se ha guardado exitosamente'); window.location.href = 'http://localhost/ordentrabajo/';</script>";
+        exit();
+    }
+}
